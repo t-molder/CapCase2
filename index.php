@@ -4,25 +4,64 @@ require '../dev/log-to-console.php'; //! remove this and all logToConsole calls 
 class Message{
     public $name;
     public $message;
+
+    function __construct($name,$message)
+    {
+        $this->name = $name;
+        $this->message = $message;
+    }
 }
 
-$messageObj = new Message();
-$TestMessage = "no message submitted";
+$file = "guestbook.txt";
+$content = "";
 
+//function
+if(!(file_exists($file))){
+    createEmptyArrayFile($file);
+}
+
+$displayMessages = json_decode(getContentFromFile($file));
 
 $submissionIsValid = false;
 if(isset($_POST['submit']))
 {
+    logToConsole("run this");
+    //validate input
+    //note: make validation function for post variables
+    $inputValid = (isset($_POST['name']) && !(empty($_POST['name']))) && (isset($_POST['message']) && !(empty($_POST['message'])));
+
     $name = $_POST['name'];
     $message = $_POST['message'];
     $submissionIsValid = true;
 
-    $messageObj->name = $name;
-    $messageObj->message = $message;
+    if($inputValid){
+        //generate json content for guestbook file
+        $messageObj = new Message($name,$message);
 
-    $content = json_encode($messageObj);
+        //append new content to file content
+        array_push($displayMessages, $messageObj);
+        $content = json_encode($displayMessages);
+        file_put_contents($file,$content);
 
-    file_put_contents("test.txt",$message);
+    }
+
+    //if all submitted correctly, clear submission by rerouting to index.php
+    //header("Location: ".$_SERVER['PHP_SELF']);
+    logToConsole("unset post, post is now ".(isset($_POST)));
+}
+
+//function
+function getContentFromFile($file){
+    if(file_exists($file)){
+        return file_get_contents($file,true);
+    }
+    return null;
+}
+
+//function more 
+function createEmptyArrayFile($file){
+    $content = json_encode([]);
+    file_put_contents($file,$content);
 }
 ?>
 
@@ -40,7 +79,7 @@ if(isset($_POST['submit']))
         <form action="index.php" method="POST">
             <div>
                 <label for='name' style="display:none;">Naam</label>
-                <input type='text' name='name' placeholder="Naam"
+                <input type='text' id='name' name='name' placeholder="Naam"
                     value=<?php
                         if($submissionIsValid){
                             echo $name;
@@ -52,7 +91,7 @@ if(isset($_POST['submit']))
             </div>
             <div>
                 <label for='message' style="display:none;">Bericht</label>
-                <input type='text' name='message' placeholder='Bericht'
+                <input type='text' id='message' name='message' placeholder='Bericht'
                     value=<?php
                         if($submissionIsValid){
                             echo $message;
@@ -68,9 +107,15 @@ if(isset($_POST['submit']))
             <?php
             if($submissionIsValid){
                 echo "<div> Submitted: $message - $name </div>";
-                echo "<div> JSON: $content </div>";
             }
+            
+            echo "<div> JSON: $content </div>";
             ?>
+
+            <?php for ($i = 0; $i < count($displayMessages); $i++) : ?>
+                <p><?php echo $displayMessages[$i]->name?></p>
+                
+            <?php endfor; ?>
         </p>
 
         <a href="http://localhost/CapCase2/">Clear Input Data</a>
