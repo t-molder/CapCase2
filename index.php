@@ -2,9 +2,9 @@
 
 $file = "guestbook.txt";
 
-include "getContents.php";
 include 'message.php';
 include 'create.php';
+include "getContents.php";
 include 'wip.php';
 ?>
 

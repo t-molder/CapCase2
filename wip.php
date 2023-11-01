@@ -22,4 +22,6 @@ if(isset($_POST['submit']))
         saveMessageToFile($file, $messageObj);
     }
 }
+
+$content = json_decode(getContentFromFile($file));
 ?>

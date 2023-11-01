@@ -13,13 +13,11 @@ function createFileWithEmptyArray($file){
 }
 
 function saveMessageToFile($file, $messageObj){ 
-    $messagesInFile = json_decode(getContentFromFile($file));
-    //! update line above to this line
-    // $messagesInFile = getContentFromFile($file);
+    $messagesInFile = getContentAsArray($file);
 
-    //append new content to file content
     array_push($messagesInFile, $messageObj);
     $content = json_encode($messagesInFile);
+
     file_put_contents($file,$content);
 }
 
