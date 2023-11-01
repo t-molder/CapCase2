@@ -1,9 +1,7 @@
 <?php declare(strict_types=1);
-include '../dev/log-to-console.php'; //! remove this and all logToConsole calls before merging with any other branches!
 include 'wip.php';
 
 $file = "guestbook.txt";
-$content = "";
 ?>
 
 <!DOCTYPE html>

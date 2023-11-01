@@ -1,7 +1,6 @@
 <?php
 //! This file contains code we want to move into other files, eventually this file should be completely empty and removed
 
-
 class Message implements JsonSerializable{
     public $name;
     public $message;
@@ -28,7 +27,6 @@ $displayMessages = json_decode(getContentFromFile($file));
 $submissionIsValid = false;
 if(isset($_POST['submit']))
 {
-    logToConsole("run this");
     //validate input
     //note: make validation function for post variables
     $inputValid = (isset($_POST['name']) && !(empty($_POST['name'])) && isset($_POST['message']) && !(empty($_POST['message'])));
@@ -47,10 +45,6 @@ if(isset($_POST['submit']))
         file_put_contents($file,$content);
 
     }
-
-    //if all submitted correctly, clear submission by rerouting to index.php
-    //header("Location: ".$_SERVER['PHP_SELF']);
-    logToConsole("unset post, post is now ".(isset($_POST)));
 }
 
 //function
