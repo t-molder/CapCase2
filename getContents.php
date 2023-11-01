@@ -6,7 +6,7 @@ function getContentFromFile($file){
     if(file_exists($file)){
         return file_get_contents($file,true);
     }
-    return null;
+    return createEmptyArrayFile($file);
 }
 function getContentAsArray($file){
 	return json_decode(getContentFromFile($file));
