@@ -3,6 +3,7 @@
 $file = "guestbook.txt";
 
 include "getContents.php";
+include "messageDisplay.php";
 include 'wip.php';
 ?>
 

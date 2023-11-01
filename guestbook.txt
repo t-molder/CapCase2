@@ -1,1 +1,1 @@
-[{"name":"Sir Arthur, King of the Britains","message":"The Holy Grail"},{"name":"black knight","message":"protect the bridge"},{"name":"Tinus","message":"php kutten"}]
+[{"name":"Sir Arthur, King of the Britons","message":"To seek the Holy Grail"},{"name":"Lancelot of Camelot","message":"To seek the Holy Grail"},{"name":"Sir Robin of Camelot","message":"To seek the Holy Grail"},{"name":"Sir Galahad of Camelot","message":"I seek the Holy Grail"}]
