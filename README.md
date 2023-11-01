@@ -20,3 +20,9 @@ Leuke ideeën voor bonus:
     Mogelijkheid om niet alleen platte tekst maar ook icoontjes toe te voegen aan de berichten
     Rollen van verschillende gebruikers
 
+Er komt een main-page met een form met daarin de username, message en submit.
+Hieronder een sectie waar de eerdere berichten worden ingeladen uit de file.
+Optioneel zit hier nog een login vooraf.
+Met de form create je een bericht, die na validatie naar de file wordt gezonden, en hieruit weer wordt afgelezen in de main-page. Dit moet dan dus geupdate worden na een submission. 
+Er moet ook de optie komen om messages weer te deleteten. Het zou leuk zijn als dit alleen door de maker of een admin zou kunnen. En als we tijd over hebben misschien berichten nog weer kunnen editten.
+    
