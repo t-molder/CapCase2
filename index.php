@@ -2,6 +2,8 @@
 
 $file = "guestbook.txt";
 
+include 'message.php';
+include 'create.php';
 include "getContents.php";
 include "messageDisplay.php";
 include 'wip.php';
