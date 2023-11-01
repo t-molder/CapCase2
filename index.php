@@ -2,6 +2,7 @@
 
 $file = "guestbook.txt";
 
+include "getContents.php";
 include 'wip.php';
 ?>
 
@@ -21,7 +22,6 @@ include 'wip.php';
         <form action="index.php" method="POST">
             <div>
                 <label for='name' style="display:none;">Naam</label>
-                <? logToConsole($name); ?>
                 <input type='text' id='name' name='name' placeholder="Naam"
                     value="<?php
                         if($submissionIsValid){
@@ -34,7 +34,6 @@ include 'wip.php';
             </div>
             <div>
                 <label for='message' style="display:none;">Bericht</label>
-                <? logToConsole($message); ?>
                 <input type='text' id='message' name='message' placeholder='Bericht'
                     value="<?php
                         if($submissionIsValid){

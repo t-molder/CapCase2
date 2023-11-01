@@ -22,8 +22,6 @@ if(!(file_exists($file))){
     createEmptyArrayFile($file);
 }
 
-$displayMessages = json_decode(getContentFromFile($file));
-
 $submissionIsValid = false;
 if(isset($_POST['submit']))
 {
@@ -45,14 +43,6 @@ if(isset($_POST['submit']))
         file_put_contents($file,$content);
 
     }
-}
-
-//function
-function getContentFromFile($file){
-    if(file_exists($file)){
-        return file_get_contents($file,true);
-    }
-    return null;
 }
 
 //function more 
