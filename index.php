@@ -1,73 +1,9 @@
 <?php declare(strict_types=1);
-require '../dev/log-to-console.php'; //! remove this and all logToConsole calls before merging with any other branches!
-
-class Message implements JsonSerializable{
-    public $name;
-    public $message;
-
-    function __construct(string $name,$message)
-    {
-        $this->name = $name;
-        $this->message = $message;
-    }
-
-    function jsonSerialize(): mixed
-    {
-        return $this;
-    }
-}
+include '../dev/log-to-console.php'; //! remove this and all logToConsole calls before merging with any other branches!
+include 'wip.php';
 
 $file = "guestbook.txt";
 $content = "";
-
-//function
-if(!(file_exists($file))){
-    createEmptyArrayFile($file);
-}
-
-$displayMessages = json_decode(getContentFromFile($file));
-
-$submissionIsValid = false;
-if(isset($_POST['submit']))
-{
-    logToConsole("run this");
-    //validate input
-    //note: make validation function for post variables
-    $inputValid = (isset($_POST['name']) && !(empty($_POST['name'])) && isset($_POST['message']) && !(empty($_POST['message'])));
-
-    $name = $_POST['name'];
-    $message = $_POST['message'];
-    $submissionIsValid = true;
-
-    if($inputValid){
-        //generate json content for guestbook file
-        $messageObj = new Message($name,$message);
-
-        //append new content to file content
-        array_push($displayMessages, $messageObj);
-        $content = json_encode($displayMessages);
-        file_put_contents($file,$content);
-
-    }
-
-    //if all submitted correctly, clear submission by rerouting to index.php
-    //header("Location: ".$_SERVER['PHP_SELF']);
-    logToConsole("unset post, post is now ".(isset($_POST)));
-}
-
-//function
-function getContentFromFile($file){
-    if(file_exists($file)){
-        return file_get_contents($file,true);
-    }
-    return null;
-}
-
-//function more 
-function createEmptyArrayFile($file){
-    $content = json_encode([]);
-    file_put_contents($file,$content);
-}
 ?>
 
 <!DOCTYPE html>
@@ -81,6 +17,8 @@ function createEmptyArrayFile($file){
 </head>
 <body>
     <main>
+        <a href="http://localhost/CapCase2/">Reload & clear Input Data</a>
+
         <form action="index.php" method="POST">
             <div>
                 <label for='name' style="display:none;">Naam</label>
@@ -110,15 +48,9 @@ function createEmptyArrayFile($file){
             </div>
             <input type="submit" name="submit" value="teken gastboek"></input>
         </form>
-        <p>
-            <?php
-            if($submissionIsValid){
-                echo "<div> Submitted: $message - $name </div>";
-            }
-            
-            echo "<div> JSON: $content </div>";
-            ?>
 
+        <p>
+            <div>Messages<div>
             <?php for ($i = 0; $i < count($displayMessages); $i++) : ?>
                 <div class="guestbook-entry">
                     <div class="name"><?php echo $displayMessages[$i]->name?></div>
@@ -127,7 +59,16 @@ function createEmptyArrayFile($file){
             <?php endfor; ?>
         </p>
 
-        <a href="http://localhost/CapCase2/">Clear Input Data</a>
+        <p>
+            <?php
+            if($submissionIsValid){
+                echo "<div> Submitted: $message - $name </div>";
+            }
+
+            //this displays the Json content of the #file for debugging purposes and should eventually be removed
+            echo "<div> JSON: $content </div>";
+            ?>
+        </p>
     </main>
 </body>
 </html>
