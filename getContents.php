@@ -8,12 +8,17 @@ function getContentFromFile($file){
     }
     return null;
 }
-function displayGuestbook() {
-	$guestbookEntries = array($name, $message); 
-	foreach ($guestbookEntries as $entry) {
-		echo $entry, "\n";
-		
-	}
+function getContentAsArray($file){
+	return json_decode(getContentFromFile($file));
 }
+
+
+	// function displayGuestbook() {
+// 	$guestbookEntries = array($name, $message); 
+// 	foreach ($guestbookEntries as $entry) {
+// 		echo $entry, "\n";
+
+// 	}
+// }
 
 ?>
