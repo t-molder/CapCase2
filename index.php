@@ -1,6 +1,8 @@
 <?php declare(strict_types=1);
 
-$message = "Hello world";
+$file = "guestbook.txt";
+
+include 'wip.php';
 ?>
 
 <!DOCTYPE html>
@@ -10,16 +12,62 @@ $message = "Hello world";
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gastenboek</title>   
 </title>
-<!-- <link rel="stylesheet" href="style.css"> -->
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
     <main>
-        <p>
-            <?php echo $message = "Hello world";?>
-        </p>
-        <!-- <form action="">
+        <a href="http://localhost/CapCase2/">Reload & clear Input Data</a>
 
-        </form> -->
+        <form action="index.php" method="POST">
+            <div>
+                <label for='name' style="display:none;">Naam</label>
+                <? logToConsole($name); ?>
+                <input type='text' id='name' name='name' placeholder="Naam"
+                    value="<?php
+                        if($submissionIsValid){
+                            echo $name;
+                        } else{
+                            "";
+                        }?>"
+                    >
+                </input>
+            </div>
+            <div>
+                <label for='message' style="display:none;">Bericht</label>
+                <? logToConsole($message); ?>
+                <input type='text' id='message' name='message' placeholder='Bericht'
+                    value="<?php
+                        if($submissionIsValid){
+                            echo $message;
+                        } else{
+                            "";
+                        }?>"
+                    >
+                </input>
+            </div>
+            <input type="submit" name="submit" value="teken gastboek"></input>
+        </form>
+
+        <p>
+            <div>Messages<div>
+            <?php for ($i = 0; $i < count($displayMessages); $i++) : ?>
+                <div class="guestbook-entry">
+                    <div class="name"><?php echo $displayMessages[$i]->name?></div>
+                    <div class="message"><?php echo $displayMessages[$i]->message?></div>
+                </div>  
+            <?php endfor; ?>
+        </p>
+
+        <p>
+            <?php
+            if($submissionIsValid){
+                echo "<div> Submitted: $message - $name </div>";
+            }
+
+            //this displays the Json content of the #file for debugging purposes and should eventually be removed
+            echo "<div> JSON: $content </div>";
+            ?>
+        </p>
     </main>
 </body>
 </html>
