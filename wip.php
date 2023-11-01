@@ -23,5 +23,5 @@ if(isset($_POST['submit']))
     }
 }
 
-$content = json_decode(getContentFromFile($file));
+$content = getContentFromFile($file);
 ?>
