@@ -1,7 +1,8 @@
 <?php declare(strict_types=1);
-include 'wip.php';
 
 $file = "guestbook.txt";
+
+include 'wip.php';
 ?>
 
 <!DOCTYPE html>
