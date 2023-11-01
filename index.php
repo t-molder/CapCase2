@@ -1,14 +1,19 @@
 <?php declare(strict_types=1);
 require '../dev/log-to-console.php'; //! remove this and all logToConsole calls before merging with any other branches!
 
-class Message{
+class Message implements JsonSerializable{
     public $name;
     public $message;
 
-    function __construct($name,$message)
+    function __construct(string $name,$message)
     {
         $this->name = $name;
         $this->message = $message;
+    }
+
+    function jsonSerialize(): mixed
+    {
+        return $this;
     }
 }
 
@@ -28,7 +33,7 @@ if(isset($_POST['submit']))
     logToConsole("run this");
     //validate input
     //note: make validation function for post variables
-    $inputValid = (isset($_POST['name']) && !(empty($_POST['name']))) && (isset($_POST['message']) && !(empty($_POST['message'])));
+    $inputValid = (isset($_POST['name']) && !(empty($_POST['name'])) && isset($_POST['message']) && !(empty($_POST['message'])));
 
     $name = $_POST['name'];
     $message = $_POST['message'];
@@ -72,32 +77,34 @@ function createEmptyArrayFile($file){
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gastenboek</title>   
 </title>
-<!-- <link rel="stylesheet" href="style.css"> -->
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
     <main>
         <form action="index.php" method="POST">
             <div>
                 <label for='name' style="display:none;">Naam</label>
+                <? logToConsole($name); ?>
                 <input type='text' id='name' name='name' placeholder="Naam"
-                    value=<?php
+                    value="<?php
                         if($submissionIsValid){
                             echo $name;
                         } else{
                             "";
-                        }?>
+                        }?>"
                     >
                 </input>
             </div>
             <div>
                 <label for='message' style="display:none;">Bericht</label>
+                <? logToConsole($message); ?>
                 <input type='text' id='message' name='message' placeholder='Bericht'
-                    value=<?php
+                    value="<?php
                         if($submissionIsValid){
                             echo $message;
                         } else{
                             "";
-                        }?>
+                        }?>"
                     >
                 </input>
             </div>
@@ -113,8 +120,10 @@ function createEmptyArrayFile($file){
             ?>
 
             <?php for ($i = 0; $i < count($displayMessages); $i++) : ?>
-                <p><?php echo $displayMessages[$i]->name?></p>
-                
+                <div class="guestbook-entry">
+                    <div class="name"><?php echo $displayMessages[$i]->name?></div>
+                    <div class="message"><?php echo $displayMessages[$i]->message?></div>
+                </div>  
             <?php endfor; ?>
         </p>
 
