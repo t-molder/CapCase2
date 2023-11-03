@@ -5,7 +5,7 @@ $file = "guestbook.txt";
 include 'message.php';
 include 'create.php';
 include "getContents.php";
-include "messageDisplay.php";
+include "messageDisplay.html";
 include 'wip.php';
 ?>
 
@@ -27,7 +27,7 @@ include 'wip.php';
                 <label for='name' style="display:none;">Naam</label>
                 <input type='text' id='name' name='name' placeholder="Naam"
                     value="<?php
-                        if($submissionIsValid){
+                        if($submissionIsValid){ 
                             echo $name;
                         } else{
                             "";
