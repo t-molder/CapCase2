@@ -2,9 +2,11 @@
 //! This file contains code we want to move into other files, eventually this file should be completely empty and removed
 
 //function
-if(!(file_exists($file))){
-    createFileWithEmptyArray($file);
-}
+// if(!(file_exists($file))){
+//     createFileWithEmptyArray($file);
+// }
+
+$guestbook = new Guestbook($file);
 
 $submissionIsValid = false;
 if(isset($_POST['submit']))
@@ -19,9 +21,12 @@ if(isset($_POST['submit']))
 
     if($inputValid){
         $messageObj = new Message($name,$message);
-        saveMessageToFile($file, $messageObj);
+
+        $guestbook->addMessage($messageObj);
+
     }
 }
 
-$content = getContentFromFile($file);
+$content = $guestbook->getContentFromFile();
+$displayMessages = $guestbook->getMessages();
 ?>

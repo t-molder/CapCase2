@@ -3,9 +3,10 @@
 $file = "guestbook.txt";
 
 include 'message.php';
-include 'create.php';
-include "getContents.php";
+include 'guestbook.php';
+
 include 'wip.php';
+
 ?>
 
 <!DOCTYPE html>
