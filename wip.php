@@ -9,7 +9,7 @@
 $guestbook = new Guestbook($file);
 
 $submissionIsValid = false;
-if(isset($_POST['submit']))
+if(isset($_POST['submitNewMessage']))
 {
     //validate input
     //note: make validation function for post variables

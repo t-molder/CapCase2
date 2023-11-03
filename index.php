@@ -2,11 +2,12 @@
 
 $file = "guestbook.txt";
 
+include "messageSubmission.php";
 include 'message.php';
-include 'guestbook.php';
-
-include 'wip.php';
-
+include 'create.php';
+include "getContents.php";
+include "messageDisplay.php";
+// include 'wip.php';
 ?>
 
 <!DOCTYPE html>
@@ -20,46 +21,8 @@ include 'wip.php';
 </head>
 <body>
     <main>
-        <a href="http://localhost/CapCase2/">Reload & clear Input Data</a>
-
-        <form action="index.php" method="POST">
-            <div>
-                <label for='name' style="display:none;">Naam</label>
-                <input type='text' id='name' name='name' placeholder="Naam"
-                    value="<?php
-                        if($submissionIsValid){
-                            echo $name;
-                        } else{
-                            "";
-                        }?>"
-                    >
-                </input>
-            </div>
-            <div>
-                <label for='message' style="display:none;">Bericht</label>
-                <input type='text' id='message' name='message' placeholder='Bericht'
-                    value="<?php
-                        if($submissionIsValid){
-                            echo $message;
-                        } else{
-                            "";
-                        }?>"
-                    >
-                </input>
-            </div>
-            <input type="submit" name="submit" value="teken gastboek"></input>
-        </form>
-
-        <p>
-            <div>Messages<div>
-            <?php for ($i = 0; $i < count($displayMessages); $i++) : ?>
-                <div class="guestbook-entry">
-                    <div class="name"><?php echo $displayMessages[$i]->name?></div>
-                    <div class="message"><?php echo $displayMessages[$i]->message?></div>
-                </div>  
-            <?php endfor; ?>
-        </p>
-
+    <?php messageSubmission(); ?>
+    <a href="http://localhost/CapCase2/">Reload & clear Input Data</a>
         <p>
             <?php
             if($submissionIsValid){
@@ -73,3 +36,6 @@ include 'wip.php';
     </main>
 </body>
 </html>
+
+
+
