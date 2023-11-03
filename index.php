@@ -2,12 +2,35 @@
 
 $file = "guestbook.txt";
 
-include "messageSubmission.php";
 include 'message.php';
-include 'create.php';
-include "getContents.php";
-include "messageDisplay.php";
-// include 'wip.php';
+include 'guestbook.php';
+
+$guestbook = new Guestbook($file);
+
+$submissionIsValid = false;
+if(isset($_POST['submitNewMessage']))
+{
+    //validate input
+    //note: make validation function for post variables
+    $inputValid = (isset($_POST['name']) && !(empty($_POST['name'])) && isset($_POST['message']) && !(empty($_POST['message'])));
+
+    $name = $_POST['name'];
+    $message = $_POST['message'];
+    $submissionIsValid = true;
+
+    if($inputValid){
+        $messageObj = new Message($name,$message);
+
+        $guestbook->addMessage($messageObj);
+
+    }
+}
+
+$content = $guestbook->getContentFromFile();
+$displayMessages = $guestbook->getMessages();
+
+include 'messageSubmission.php';
+include 'messageDisplay.php';
 ?>
 
 <!DOCTYPE html>
