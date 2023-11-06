@@ -5,11 +5,11 @@ class Message implements JsonSerializable{
     public $message;
     public $id;
 
-    function __construct(string $name, string $message, string $ID = null)
+    function __construct(string $name, string $message, string $id = null)
     {
         $this->name = $name;
         $this->message = $message;
-        $this->id = $ID ?? $this->generateID();
+        $this->id = $id ?? $this->generateID();
     }
 
     public function getName(){
@@ -33,4 +33,17 @@ class Message implements JsonSerializable{
         return $this;
     }
 }
+
+#region helper functions
+function isValidAsMessage($object){
+    return (property_exists($object, 'name') && 
+            property_exists($object, 'message'));
+}
+
+function createMessageFrom($object){
+    $messageID = $object->id ?? null;
+
+    return new Message($object->name,$object->message,$messageID);
+}
+#endregion
 ?>
