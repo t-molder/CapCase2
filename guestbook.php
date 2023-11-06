@@ -68,7 +68,7 @@ class Guestbook implements JsonSerializable{
 
     #region save
     function saveToFile(){ 
-        $content = json_encode($this->messages);
+        $content = json_encode($this,JSON_PRETTY_PRINT);
     
         file_put_contents($this->file,$content);
     }
@@ -76,9 +76,8 @@ class Guestbook implements JsonSerializable{
 
     function jsonSerialize(): mixed
     {
-        //! this doesn't work, what the hell;
-        return json_encode($this->messages);
-        
+        //return $this->getMessages();
+        return $this->messages;
     }
 }
 ?>
