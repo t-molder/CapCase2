@@ -2,12 +2,46 @@
 
 $file = "guestbook.txt";
 
-include "messageSubmission.php";
 include 'message.php';
-include 'create.php';
-include "getContents.php";
-include "messageDisplay.php";
-// include 'wip.php';
+include 'guestbook.php';
+
+$guestbook = new Guestbook($file);
+
+if (isset($_POST["submitDeleteMessage"]))
+{
+    $messageID = $_POST["submitDeleteMessage"];
+    echo $messageID;
+    echo $guestbook->getMessageIndex($messageID);
+    $guestbook->deleteMessage($messageID);
+}
+
+// echo $guestbook->getMessageIndex("891a07e2-31d4-4b93-a82f-79356b4a7090");
+
+
+$submissionIsValid = false;
+if(isset($_POST['submitNewMessage']))
+{
+    //validate input
+    //note: make validation function for post variables
+    $inputValid = (isset($_POST['name']) && !(empty($_POST['name'])) && isset($_POST['message']) && !(empty($_POST['message'])));
+
+    $name = $_POST['name'];
+    $message = $_POST['message'];
+    $submissionIsValid = true;
+
+    if($inputValid){
+        $messageObj = new Message($name,$message);
+
+        $guestbook->addMessage($messageObj);
+
+    }
+}
+
+$content = file_get_contents($guestbook->file,true);
+$displayMessages = $guestbook->getMessages();
+
+include 'messageSubmission.php';
+include 'messageDisplay.php';
 ?>
 
 <!DOCTYPE html>
