@@ -23,17 +23,33 @@ if(isset($_POST['submitNewMessage']))
 {
     //validate input
     //note: make validation function for post variables
+
     $inputValid = (isset($_POST['name']) && !(empty($_POST['name'])) && isset($_POST['message']) && !(empty($_POST['message'])));
 
-    $name = $_POST['name'];
-    $message = $_POST['message'];
+    $name = ($_POST['name']);
+    function validateName($name)
+    {
+        $name = trim($name);
+        $name = htmlspecialchars($name);
+        return $name;
+    }
+    $name = validateName($name);
+
+    $message = validateMessage($_POST['message']);
+    function validateMessage($message)
+    {
+        $message = trim($message);
+        $message = htmlspecialchars($message);
+        return $message;
+    }
+    $message = validateMessage($message);
+
     $submissionIsValid = true;
 
     if($inputValid){
         $messageObj = new Message($name,$message);
 
         $guestbook->addMessage($messageObj);
-
     }
 }
 
