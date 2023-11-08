@@ -21,6 +21,14 @@ class Guestbook implements JsonSerializable{
         return $this->messages;
     }
 
+    function getMessagesInRange($amount, $start){
+
+        $messages = [...$this->messages];
+        array_splice($this->messages, $start, $amount);
+
+        return $this->messages;
+    }
+
     function getMessageByID(string $id){
         $index = $this->getMessageIndex($id);
         if($index == null){
@@ -96,12 +104,12 @@ class Guestbook implements JsonSerializable{
     #region delete
     function deleteMessage(string $id) {
         $index = $this->getMessageIndex($id);
-        if($index == null){
+        if($index === null){
             return;
         }
 
         array_splice($this->messages, $index, 1);
-
+        echo "Deleted message at $index";
         $this->saveToFile();
     }
 

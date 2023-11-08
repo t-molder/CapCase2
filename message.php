@@ -20,7 +20,7 @@ class Message implements JsonSerializable{
         return $this->message;
     }
 
-    public function getID(){
+    public function getID(): string{
         return $this->id;
     }
 

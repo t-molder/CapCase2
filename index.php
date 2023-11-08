@@ -7,6 +7,17 @@ include 'guestbook.php';
 
 $guestbook = new Guestbook($file);
 
+if (isset($_POST["submitDeleteMessage"]))
+{
+    $messageID = $_POST["submitDeleteMessage"];
+    echo $messageID;
+    echo $guestbook->getMessageIndex($messageID);
+    $guestbook->deleteMessage($messageID);
+}
+
+// echo $guestbook->getMessageIndex("891a07e2-31d4-4b93-a82f-79356b4a7090");
+
+
 $submissionIsValid = false;
 if(isset($_POST['submitNewMessage']))
 {
@@ -26,7 +37,7 @@ if(isset($_POST['submitNewMessage']))
     }
 }
 
-$content = $guestbook->getContentFromFile();
+$content = file_get_contents($guestbook->file,true);
 $displayMessages = $guestbook->getMessages();
 
 include 'messageSubmission.php';
