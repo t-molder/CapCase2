@@ -1,5 +1,5 @@
 .guestbook-entry{
-    display: block;
+    display: flex;
     border-style: solid;
     border-color: black;
     border-width: 2px;
@@ -7,4 +7,8 @@
     max-width: 40%;
     margin: .5em;
     padding: 0.25em;
+}
+.input-field{
+    display:flex;
+
 }
