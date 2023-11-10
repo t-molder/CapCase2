@@ -16,6 +16,14 @@ if (isset($_POST["submitDeleteMessage"]))
 }
 
 // echo $guestbook->getMessageIndex("891a07e2-31d4-4b93-a82f-79356b4a7090");
+function validateName($name)        {return validateText($name);}
+function validateMessage($message)  {return validateText($message);}
+function validateText($text)
+{
+    $text = trim($text);
+    $text = htmlspecialchars($text);
+    return $text;
+}
 
 
 $submissionIsValid = false;
@@ -26,23 +34,8 @@ if(isset($_POST['submitNewMessage']))
 
     $inputValid = (isset($_POST['name']) && !(empty($_POST['name'])) && isset($_POST['message']) && !(empty($_POST['message'])));
 
-    $name = ($_POST['name']);
-    function validateName($name)
-    {
-        $name = trim($name);
-        $name = htmlspecialchars($name);
-        return $name;
-    }
-    $name = validateName($name);
-
+    $name = validateName($_POST['name']);
     $message = validateMessage($_POST['message']);
-    function validateMessage($message)
-    {
-        $message = trim($message);
-        $message = htmlspecialchars($message);
-        return $message;
-    }
-    $message = validateMessage($message);
 
     $submissionIsValid = true;
 
