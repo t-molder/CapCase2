@@ -1,8 +1,10 @@
-<html> 
-	<div>Berichten<div>
 	<?php 
-		for ($i = 0; $i < count($displayMessages); $i++){
-			messageDisplay($displayMessages[$i]);
+		function displayMessages($displayMessages) 
+		{
+			
+			for ($i = 0; $i < count($displayMessages); $i++){
+				messageDisplay($displayMessages[$i]);
+			}
 		}
 
 		function messageDisplay($messageObject){
@@ -17,4 +19,3 @@
 			echo str_replace($replace, $values, $template);
 		}
 	?>
-</html>
