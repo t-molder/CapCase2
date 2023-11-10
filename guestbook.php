@@ -21,12 +21,11 @@ class Guestbook implements JsonSerializable{
         return $this->messages;
     }
 
-    function getMessagesInRange($amount, $start){
+    function getMessagesInRange(int $start, int $amount){
 
         $messages = [...$this->messages];
-        array_splice($this->messages, $start, $amount);
-
-        return $this->messages;
+        
+        return array_splice($messages, $start, $amount);
     }
 
     function getMessageByID(string $id){
@@ -40,7 +39,7 @@ class Guestbook implements JsonSerializable{
     function getMessageIndex(string $id){
         for ($i = 0; $i < count($this->messages); $i++) { 
             $message = $this->messages[$i];
-            if($id === $message->id){
+            if($id === $message->getID()){
                 return $i;
             }
         }
@@ -49,13 +48,17 @@ class Guestbook implements JsonSerializable{
 
     #region create file
     function ensureFileExists(string $file){
+        echo "ensure file exists <br>";
+        echo "$file <br>";
         if((file_exists($file))){
+            echo "file does exist";
             return;
         }
         $this->createFileWithEmptyArray($file);
     }
 
     function createFileWithEmptyArray($file){
+        echo "this gets called";
         $content = json_encode([]);
         file_put_contents($file,$content);
     }

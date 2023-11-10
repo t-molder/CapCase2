@@ -10,8 +10,8 @@ $guestbook = new Guestbook($file);
 if (isset($_POST["submitDeleteMessage"]))
 {
     $messageID = $_POST["submitDeleteMessage"];
-    echo $messageID;
-    echo $guestbook->getMessageIndex($messageID);
+    // echo $messageID;
+    // echo $guestbook->getMessageIndex($messageID);
     $guestbook->deleteMessage($messageID);
 }
 
@@ -59,13 +59,27 @@ include 'messageDisplay.php';
     <a href="http://localhost/CapCase2/">Reload & clear Input Data</a>
         <p>
             <?php
-            if($submissionIsValid){
-                echo "<div> Submitted: $message - $name </div>";
-            }
+            // if($submissionIsValid){
+            //     echo "<div> Submitted: $message - $name </div>";
+            // }
 
+            //displayMessages($displayMessages);
+
+            displayPage($currentPage,$messageAmount);
+            ?>
+            <form action="">
+                <select>
+                    <option value="1">1</option>
+                </select>
+                <button type="submit" name="submitPageSelect" value="1">pageSelect</button>
+            </form>
+            
+            <!-- <pre> -->
+            <?php
             //this displays the Json content of the #file for debugging purposes and should eventually be removed
             echo "<div> JSON: $content </div>";
             ?>
+            <!-- </pre> -->
         </p>
     </main>
 </body>
