@@ -73,9 +73,6 @@ include 'messageDisplay.php';
             <div class ="mb-3">
                 <?php
                 displayMessages($displayMessages);
-                if($submissionIsValid){
-                    echo "<div> Submitted: $message - $name </div>";
-                }
 
                 //this displays the Json content of the #file for debugging purposes and should eventually be removed
                 // echo "<div> JSON: $content </div>";
