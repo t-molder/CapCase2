@@ -3,12 +3,12 @@
 	<form action="index.php" method="POST">
 		<div class="mb-3">
 			<label for='name' style="display:none;">Naam</label>
-			<input type='text' class="form-control" id='name' name='name' placeholder="Naam" required
+			<input type='text' class="form-name" id='name' name='name' placeholder="Naam" required
 				value="{name}"/>
 		</div>
 		<div class="mb-3">
 			<label for='message' style="display:none;">Bericht</label>
-			<textarea id='message' class="form-control" name='message' placeholder='Bericht' required>{message}</textarea>
+			<textarea id='message' class="form-message" name='message' placeholder='Bericht' required>{message}</textarea>
 		</div>
 		<input type="submit" class="btn btn-primary" name="submitNewMessage" value="Teken Gastboek"></input>
 	</form>
