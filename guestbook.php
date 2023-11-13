@@ -109,7 +109,7 @@ class Guestbook implements JsonSerializable{
         }
 
         array_splice($this->messages, $index, 1);
-        echo "Deleted message at $index";
+        // echo "Deleted message at $index";
         $this->saveToFile();
     }
 
