@@ -207,15 +207,23 @@
   border-width: 2px;
 
 }
+main {
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+  min-width: 30%;
+}
 
 body {
   display: flex;
-
+  justify-self: center;
   flex: 1;
   align-self: center;
   width: 100%;
-  max-width: 900px;
-  margin: 10% 10% 10% 10%;
+  /* max-width: 900px; */
+  /* margin: 10% 10% 10% 10%; */
+
+  padding: 2% 2% 2% 2%;
   font-family: var(--bs-body-font-family);
   font-size: var(--bs-body-font-size);
   font-weight: var(--bs-body-font-weight);
@@ -225,6 +233,10 @@ body {
   background-color: #073642;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+html {
+  background-color: #002b36;
 }
 
 hr {
