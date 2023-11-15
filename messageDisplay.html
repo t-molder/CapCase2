@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
-    <div class="guestbook-entry">
+    <div class="text-start">
         <div class="name">{name}</div>
         <div class="message">{message}</div>
-        <form action="index.php" method="POST">
-            <button type="submit" name="submitDeleteMessage" value="{id}">Delete Message</input>
+        <form action="index.php" class="delete-form" method="POST">
+            <button type="submit" class="btn btn-secondary" name="submitDeleteMessage" value="{id}">Delete Message</button>
         </form>
     </div>
 </html>

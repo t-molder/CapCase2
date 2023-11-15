@@ -60,23 +60,24 @@ include 'messageDisplay.php';
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gastenboek</title>   
 </title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="bootstrap.css">
 </head>
 <body>
     <main>
         <h1>Gastenboek</h1>
-    <?php messageSubmission(); ?>
-    <a href="http://localhost/CapCase2/">Reload & clear Input Data</a>
         <p>
-            <?php
-            displayMessages($displayMessages);
-            if($submissionIsValid){
-                echo "<div> Submitted: $message - $name </div>";
-            }
+            <?php messageSubmission(); ?>
+        </p>
+        <a href="http://localhost/CapCase2/">Reload & clear Input Data</a>
+        <p>
+            <div class ="mb-3">
+                <?php
+                displayMessages($displayMessages);
 
-            //this displays the Json content of the #file for debugging purposes and should eventually be removed
-            // echo "<div> JSON: $content </div>";
-            ?>
+                //this displays the Json content of the #file for debugging purposes and should eventually be removed
+                // echo "<div> JSON: $content </div>";
+                ?>
+            </div>
         </p>
     </main>
 </body>
